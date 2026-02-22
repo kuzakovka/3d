@@ -57,7 +57,7 @@ const defaultTourConfig = {
             ]
         },
         "room2": {
-            "title": "Вторая комната",
+            "title": "Тумба 1200",
             "hfov": 110,
             "type": "equirectangular",
             "panorama": "room2.jpg",
