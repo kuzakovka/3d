@@ -36,10 +36,10 @@ class TourModule {
     }
 }
 
-// Конфигурация по умолчанию
+// Подобранные панорамы в низком разрешении для быстрой загрузки
 const defaultTourConfig = {
     "default": {
-        "firstScene": "living-room",
+        "firstScene": "room1",
         "author": "Antigravity 3D",
         "sceneFadeDuration": 1000,
         "autoLoad": true,
@@ -47,30 +47,28 @@ const defaultTourConfig = {
         "autoRotate": -2
     },
     "scenes": {
-        "living-room": {
-            "title": "Гостиная",
+        "room1": {
+            "title": "Светлая комната",
             "hfov": 110,
             "type": "equirectangular",
-            "panorama": "https://pannellum.org/images/alma.jpg",
+            "panorama": "https://raw.githubusercontent.com/mpetroff/pannellum/master/doc/examples/example-panorama.jpg",
             "hotSpots": [
-                { "pitch": -1.1, "yaw": 102.9, "type": "scene", "text": "В сад", "sceneId": "garden" }
+                { "pitch": -5, "yaw": 120, "type": "scene", "text": "В другую комнату", "sceneId": "room2" }
             ]
         },
-        "garden": {
-            "title": "Сад",
+        "room2": {
+            "title": "Галерея",
             "hfov": 110,
             "type": "equirectangular",
-            "panorama": "https://pannellum.org/images/tocopilla.jpg",
+            "panorama": "https://pannellum.org/images/charles-street.jpg",
             "hotSpots": [
-                { "pitch": -0.6, "yaw": 37.1, "type": "scene", "text": "В гостиную", "sceneId": "living-room" }
+                { "pitch": -5, "yaw": 0, "type": "scene", "text": "Вернуться", "sceneId": "room1" }
             ]
         }
     }
 };
 
-// Инициализация при загрузке
+// Инициализация
 document.addEventListener('DOMContentLoaded', () => {
-    // В будущем ты сможешь создавать несколько туров на одной странице, 
-    // просто создавая новые экземпляры TourModule с разными ID
     window.myTour = new TourModule('main-tour-container', defaultTourConfig);
 });
