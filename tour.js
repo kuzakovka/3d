@@ -36,7 +36,7 @@ class TourModule {
     }
 }
 
-// Подобранные панорамы в низком разрешении для быстрой загрузки
+// Теперь используем локальные файлы, которые будут лежать в той же папке
 const defaultTourConfig = {
     "default": {
         "firstScene": "room1",
@@ -48,21 +48,21 @@ const defaultTourConfig = {
     },
     "scenes": {
         "room1": {
-            "title": "Светлая комната",
+            "title": "Первая комната",
             "hfov": 110,
             "type": "equirectangular",
-            "panorama": "https://raw.githubusercontent.com/mpetroff/pannellum/master/doc/examples/example-panorama.jpg",
+            "panorama": "room1.jpg",
             "hotSpots": [
-                { "pitch": -5, "yaw": 120, "type": "scene", "text": "В другую комнату", "sceneId": "room2" }
+                { "pitch": -5, "yaw": 120, "type": "scene", "text": "Перейти во вторую", "sceneId": "room2" }
             ]
         },
         "room2": {
-            "title": "Галерея",
+            "title": "Вторая комната",
             "hfov": 110,
             "type": "equirectangular",
-            "panorama": "https://pannellum.org/images/charles-street.jpg",
+            "panorama": "room2.jpg",
             "hotSpots": [
-                { "pitch": -5, "yaw": 0, "type": "scene", "text": "Вернуться", "sceneId": "room1" }
+                { "pitch": -5, "yaw": 0, "type": "scene", "text": "Вернуться назад", "sceneId": "room1" }
             ]
         }
     }
@@ -72,5 +72,3 @@ const defaultTourConfig = {
 document.addEventListener('DOMContentLoaded', () => {
     window.myTour = new TourModule('main-tour-container', defaultTourConfig);
 });
-
-
