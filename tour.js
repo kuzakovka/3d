@@ -72,3 +72,5 @@ const defaultTourConfig = {
 document.addEventListener('DOMContentLoaded', () => {
     window.myTour = new TourModule('main-tour-container', defaultTourConfig);
 });
+
+
