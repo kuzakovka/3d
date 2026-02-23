@@ -152,12 +152,12 @@ class TourBlock {
             const firstId = cfg?.default?.firstScene;
             const panoramaUrl = cfg?.scenes?.[firstId]?.panorama;
             if (panoramaUrl && typeof panoramaUrl === 'string') {
-                // Предзагружаем картинку, потом применяем фон
+                const proxied = this._proxyUrl(panoramaUrl);
                 const img = new Image();
                 img.onload = () => {
-                    this._previewBg.style.backgroundImage = `url(${JSON.stringify(panoramaUrl)})`;
+                    this._previewBg.style.backgroundImage = `url(${JSON.stringify(proxied)})`;
                 };
-                img.src = panoramaUrl;
+                img.src = proxied;
             }
         } catch {
             // Тихо игнорируем — фон просто останется тёмным
@@ -325,11 +325,35 @@ class TourBlock {
         });
     }
 
+    // ─── Проксирование URL ────────────────────────────────────────────────────
+    // Настраивается через атрибут data-proxy-base на контейнере:
+    //   data-proxy-base="/api/proxy"  → Vercel (по умолчанию)
+    //   data-proxy-base="/proxy"      → свой Node.js сервер (tour-editor)
+    //   data-proxy-base=""            → без прокси (статический хостинг)
+
+    _proxyUrl(url) {
+        if (!url || !url.startsWith('http')) return url;
+        // Читаем настройку из атрибута контейнера
+        const base = this.container.dataset.proxyBase !== undefined
+            ? this.container.dataset.proxyBase
+            : '/api/proxy'; // default: Vercel
+        if (!base) return url; // пустой атрибут = без прокси
+        return `${base}?url=${encodeURIComponent(url)}`;
+    }
+
     // ─── Инициализация Pannellum ──────────────────────────────────────────────
 
     _initViewer(config) {
+        // Прокси все внешние URL панорам — обходит CORS любого хостинга
+        const proxiedConfig = JSON.parse(JSON.stringify(config));
+        Object.values(proxiedConfig.scenes).forEach(scene => {
+            if (scene.panorama) {
+                scene.panorama = this._proxyUrl(scene.panorama);
+            }
+        });
+
         try {
-            this.viewer = window.pannellum.viewer(this._viewerEl, config);
+            this.viewer = window.pannellum.viewer(this._viewerEl, proxiedConfig);
         } catch (err) {
             this._showError(`Ошибка инициализации просмотрщика: ${err.message}`);
         }
