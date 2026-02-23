@@ -1,5 +1,5 @@
 /**
- * TourBlock — Самодостаточный, защищённый модуль 3D-тура v1.1
+ * TourBlock — Самодостаточный, защищённый модуль 3D-тура v1.2
  *
  * Интеграция на любой сайт (2 строки):
  *   <div id="my-tour" data-tour-config="./tour-editor/tour-config.json"></div>
@@ -59,6 +59,11 @@ class TourBlock {
         }
 
         this._render();
+
+        // Автозапуск — если задан атрибут data-autoplay
+        if (this.container.hasAttribute('data-autoplay')) {
+            this._activate();
+        }
     }
 
     // ─── Проверка пути к конфигу ──────────────────────────────────────────────
