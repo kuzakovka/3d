@@ -20,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-light.css">
 </head>
 
 <body>
@@ -182,198 +182,18 @@
             </div>
         </div>
     </section>
-    <!-- ═══════════════════════════════════════════════════════════
-     3D ВИРТУАЛЬНЫЙ ТУР — универсальный встраиваемый блок
-     
-     Как использовать:
-       1. Вставьте весь этот блок в любое место страницы
-       2. Измените TOUR_URL на ссылку вашего тура
-       3. Укажите PREVIEW_URL (скриншот) или оставьте ''
-     
-     Дополнительные файлы: не нужны
-     Зависимости: нет
-     Совместимость: любой сайт, любой хостинг
-═══════════════════════════════════════════════════════════ -->
-
-    <div id="ec-tour-block" style="
-    display:block;
-    width:100%;
-    font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-    box-sizing:border-box;
-    padding:60px 20px;
-">
-        <div style="max-width:1200px; margin:0 auto; box-sizing:border-box;">
-
-            <!-- Заголовок — сброс стилей хозяйского сайта через all:unset -->
-            <h2 id="ec-tour-title" style="
-            all:unset;
-            display:block;
-            text-align:center;
-            margin-bottom:24px;
-            font-size:clamp(1.4rem, 4vw, 2rem);
-            font-weight:800;
-            letter-spacing:-0.03em;
-            color:#0f172a;
-            line-height:1.2;
-            font-family:inherit;
-        ">Виртуальный тур по салону</h2>
-
-            <!-- Фасад: показывается до нажатия -->
-            <div id="ec-tour-facade" style="
-            position:relative;
-            width:100%;
-            height:600px;
-            background:linear-gradient(135deg, #1a1a2e 0%, #3d3d6e 100%);
-            border-radius:12px;
-            cursor:pointer;
-            overflow:hidden;
-            box-sizing:border-box;
-            -webkit-tap-highlight-color:transparent;
-        ">
-                <!-- Слой размытого превью (включается если задан PREVIEW_URL) -->
-                <div id="ec-tour-bg" style="
-                position:absolute;
-                inset:0;
-                background-size:cover;
-                background-position:center;
-                filter:blur(10px);
-                transform:scale(1.08);
-                opacity:0;
-                transition:opacity 0.4s ease;
-            "></div>
-
-                <!-- Затемняющий оверлей поверх превью -->
-                <div style="
-                position:absolute;
-                inset:0;
-                background:rgba(10, 10, 30, 0.45);
-                pointer-events:none;
-            "></div>
-
-                <!-- Кнопка Play -->
-                <div id="ec-tour-play" style="
-                position:absolute;
-                top:50%;
-                left:50%;
-                transform:translate(-50%, -50%);
-                width:80px;
-                height:80px;
-                border-radius:50%;
-                background:rgba(255, 255, 255, 0.95);
-                display:flex;
-                align-items:center;
-                justify-content:center;
-                font-size:30px;
-                line-height:1;
-                padding-left:4px;
-                box-shadow:0 8px 32px rgba(0, 0, 0, 0.35);
-                transition:transform 0.2s ease, box-shadow 0.2s ease;
-                pointer-events:none;
-                z-index:2;
-            ">▶</div>
-
-                <!-- Подпись под кнопкой -->
-                <div style="
-                position:absolute;
-                bottom:20px;
-                left:50%;
-                transform:translateX(-50%);
-                color:#ffffff;
-                font-size:0.82rem;
-                font-weight:600;
-                white-space:nowrap;
-                font-family:inherit;
-                background:rgba(0, 0, 0, 0.5);
-                padding:7px 16px;
-                border-radius:20px;
-                backdrop-filter:blur(6px);
-                -webkit-backdrop-filter:blur(6px);
-                pointer-events:none;
-                z-index:2;
-            ">Нажмите для запуска виртуального тура</div>
-            </div>
-
-            <!-- iframe — скрыт до клика, src намеренно пустой -->
-            <iframe id="ec-tour-frame" style="
-                display:none;
-                width:100%;
-                height:600px;
-                border:none;
-                border-radius:12px;
-                box-sizing:border-box;
-            " allow="fullscreen" referrerpolicy="no-referrer" sandbox="allow-scripts allow-forms allow-fullscreen"
-                title="Виртуальный 3D тур"></iframe>
-
+    <!-- 3D ТУР ─────────────────────────────────────── -->
+    <section style="padding:60px 20px;">
+        <div style="max-width:1200px; margin:0 auto;">
+            <h2 class="section-title" style="text-align:center; margin-bottom:24px;">
+                Виртуальный тур по салону
+            </h2>
+            <iframe src="https://3dtoool.vercel.app" width="100%" height="600" frameborder="0" allowfullscreen
+                loading="lazy" sandbox="allow-scripts allow-same-origin allow-fullscreen"
+                style="border-radius:8px; display:block;"></iframe>
         </div>
-    </div>
-
-    <script>
-        (function () {
-
-            /* ╔══════════════════════════════════════════╗
-               ║  НАСТРОЙКИ — меняйте только здесь       ║
-               ╠══════════════════════════════════════════╣
-               ║  TOUR_URL    — ссылка на 3D тур          ║
-               ║  PREVIEW_URL — скриншот тура (или '')    ║
-               ╚══════════════════════════════════════════╝ */
-
-            var TOUR_URL = 'https://3dtoool.vercel.app';
-            var PREVIEW_URL = 'https://i.pinimg.com/originals/16/01/f4/1601f42a4bde9a40fdc388504c4087ec.jpg?nii=t'; /* пример: 'https://yoursite.ru/img/tour.jpg' */
-
-            /* ─── Валидация URL (защита от инъекций) ─── */
-            function isSafeHttpsUrl(url) {
-                return typeof url === 'string' &&
-                    /^https:\/\/[\w\-._~:/?#\[\]@!$&()*+,;=%]+$/.test(url);
-            }
-
-            /* ─── Инициализация ─── */
-            function init() {
-                var facade = document.getElementById('ec-tour-facade');
-                var frame = document.getElementById('ec-tour-frame');
-                var play = document.getElementById('ec-tour-play');
-                var bg = document.getElementById('ec-tour-bg');
-
-                if (!facade || !frame) return;
-
-                /* Превью с блюром — если URL указан и валиден */
-                if (PREVIEW_URL && isSafeHttpsUrl(PREVIEW_URL)) {
-                    bg.style.backgroundImage = 'url("' + PREVIEW_URL + '")';
-                    var img = new Image();
-                    img.onload = function () { bg.style.opacity = '1'; };
-                    img.onerror = function () { /* превью не загрузилось — остаётся градиент */ };
-                    img.src = PREVIEW_URL;
-                }
-
-                /* Запуск тура по клику (once: не сработает повторно) */
-                facade.addEventListener('click', function () {
-                    if (!isSafeHttpsUrl(TOUR_URL)) return;
-                    facade.style.display = 'none';
-                    frame.src = TOUR_URL;
-                    frame.style.display = 'block';
-                }, { once: true });
-
-                /* Hover-эффект на кнопке Play */
-                facade.addEventListener('mouseenter', function () {
-                    play.style.transform = 'translate(-50%, -50%) scale(1.12)';
-                    play.style.boxShadow = '0 12px 40px rgba(0, 0, 0, 0.5)';
-                });
-                facade.addEventListener('mouseleave', function () {
-                    play.style.transform = 'translate(-50%, -50%) scale(1)';
-                    play.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.35)';
-                });
-            }
-
-            /* Запуск после готовности DOM */
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', init);
-            } else {
-                init();
-            }
-
-        })();
-    </script>
-
-    <!-- ═══════════════════════════════════════════════════════════ -->
+    </section>
+    <!-- ─────────────────────────────────────────────── -->
 
     <!-- NEW ARRIVALS -->
     <section class="arrivals-section" id="arrivals">

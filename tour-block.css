@@ -206,8 +206,7 @@
 /* ─── Адаптивность ────────────────────────────────────────────── */
 @media (max-width: 768px) {
     .tb-container {
-        aspect-ratio: 4 / 3;
-        border-radius: 14px;
+        border-radius: 0;
     }
 
     .tb-play-btn {
