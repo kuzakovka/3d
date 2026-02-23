@@ -145,6 +145,28 @@
         </div>
     </section>
 
+    <!-- 3D TOUR SECTION -->
+    <section class="tour-section" style="padding: 60px 0; background: #0a0a0c;">
+        <div class="container">
+            <div class="section-header" style="margin-bottom: 30px;">
+                <h2 class="section-title">Виртуальный тур по шоуруму</h2>
+                <p class="section-subtitle">Прогуляйтесь по нашему магазину прямо сейчас</p>
+            </div>
+
+            <!-- 1. Стили тура -->
+            <link rel="stylesheet" href="https://3dtoool.vercel.app/tour-block.css">
+
+            <!-- 2. Контейнер тура (задайте ширину и высоту под ваш дизайн) -->
+            <div id="my-tour" data-tour-config="https://3dtoool.vercel.app/tour-editor/tour-config.json"
+                data-proxy-base="https://3dtoool.vercel.app/api/proxy"
+                style="width: 100%; height: 500px; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+            </div>
+
+            <!-- 3. Скрипт тура -->
+            <script src="https://3dtoool.vercel.app/tour-block.js"></script>
+        </div>
+    </section>
+
     <!-- CATALOG -->
     <section class="catalog-section" id="catalog">
         <div class="container">

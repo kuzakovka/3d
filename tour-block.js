@@ -64,12 +64,13 @@ class TourBlock {
     // ─── Проверка пути к конфигу ──────────────────────────────────────────────
 
     _isSafeConfigPath(path) {
-        // Блокируем абсолютные URL на сторонние домены
+        // Разрешаем относительные пути и внешние HTTP/HTTPS ссылки
         try {
+            // Если путь относительный, URL кинет ошибку (или сработает с base)
             const url = new URL(path, window.location.origin);
-            return url.origin === window.location.origin;
+            return url.protocol === 'http:' || url.protocol === 'https:';
         } catch {
-            return false;
+            return false; // Защита от javascript: или data: схем в корне конфигурации
         }
     }
 
