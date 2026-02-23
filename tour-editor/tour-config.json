@@ -1,0 +1,86 @@
+{
+    "default": {
+        "firstScene": "scene_1771853974669",
+        "sceneFadeDuration": 1000,
+        "autoLoad": true,
+        "showFullscreenCtrl": true,
+        "autoRotate": 0
+    },
+    "scenes": {
+        "scene_1771853974669": {
+            "title": "Комната 1",
+            "type": "equirectangular",
+            "panorama": "https://files.kuula.io/68f0-8c09-7aa1-7920/01-4096.jpg",
+            "hotSpots": [
+                {
+                    "id": "hs_scene_1771853974669_1771854016352",
+                    "pitch": -12.531811396713737,
+                    "yaw": -105.27650654810131,
+                    "type": "scene",
+                    "text": "Комната 2",
+                    "sceneId": "scene_1771853997848"
+                },
+                {
+                    "id": "hs_scene_1771853974669_1771854029530",
+                    "pitch": -6.231079240388286,
+                    "yaw": 4.59713119755922,
+                    "type": "scene",
+                    "text": "Ошибочка",
+                    "sceneId": ""
+                }
+            ]
+        },
+        "scene_1771853997848": {
+            "title": "Комната 2",
+            "type": "equirectangular",
+            "panorama": "https://files.kuula.io/691d-ab51-7260-d188/01-4096.jpg",
+            "hotSpots": [
+                {
+                    "id": "hs_scene_1771853997848_1771854039883",
+                    "pitch": -16.34040708272454,
+                    "yaw": -43.18749920828378,
+                    "type": "scene",
+                    "text": "Комната 1",
+                    "sceneId": "scene_1771853974669"
+                },
+                {
+                    "id": "hs_scene_1771853997848_1771854047410",
+                    "pitch": -3.4327200910397253,
+                    "yaw": 72.57617695703236,
+                    "type": "scene",
+                    "text": "Комната 3",
+                    "sceneId": "scene_1771854011702"
+                }
+            ]
+        },
+        "scene_1771854011702": {
+            "title": "Комната 3",
+            "type": "equirectangular",
+            "panorama": "https://files.kuula.io/68e0-0a25-a762-2298/01-4096.jpg",
+            "hotSpots": [
+                {
+                    "id": "hs_scene_1771854011702_1771854067831",
+                    "pitch": -4.23604385157572,
+                    "yaw": 158.19136073391917,
+                    "type": "scene",
+                    "text": "Комната 2",
+                    "sceneId": "scene_1771853997848"
+                },
+                {
+                    "id": "hs_scene_1771854011702_1771855457227",
+                    "pitch": -23.038532418568863,
+                    "yaw": -101.36340840075994,
+                    "type": "scene",
+                    "text": "Комната 4 (копия)",
+                    "sceneId": "scene_1771855446934"
+                }
+            ]
+        },
+        "scene_1771855446934": {
+            "title": "Комната 4 (копия)",
+            "type": "equirectangular",
+            "panorama": "https://files.kuula.io/691d-ab51-7260-d188/01-4096.jpg",
+            "hotSpots": []
+        }
+    }
+}

@@ -1,0 +1,617 @@
+:root {
+    --bg-dark: #0a0a0c;
+    --bg-panel: rgba(20, 20, 25, 0.8);
+    --accent: #6366f1;
+    --accent-hover: #818cf8;
+    --text-main: #ffffff;
+    --text-dim: #94a3b8;
+    --border: rgba(255, 255, 255, 0.1);
+    --glass: rgba(255, 255, 255, 0.05);
+    --radius: 12px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+    background: var(--bg-dark);
+    color: var(--text-main);
+    height: 100vh;
+    overflow: hidden;
+}
+
+.app-layout {
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: 300px;
+    background: var(--bg-panel);
+    backdrop-filter: blur(20px);
+    border-right: 1px border var(--border);
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+}
+
+.sidebar-header {
+    padding: 24px;
+    border-bottom: 1px solid var(--border);
+}
+
+.sidebar-header h2 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.sidebar-header p {
+    font-size: 0.75rem;
+    color: var(--accent);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.section {
+    padding: 20px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.section-title span {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+}
+
+.icon-btn {
+    background: var(--glass);
+    border: 1px solid var(--border);
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-btn:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+/* Room List Items */
+.item-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.room-item {
+    padding: 12px 16px;
+    background: var(--glass);
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.room-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.room-item.active {
+    background: rgba(99, 102, 241, 0.15);
+    border-color: var(--accent);
+}
+
+.room-item .room-title {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.room-item .first-badge {
+    font-size: 0.6rem;
+    background: var(--accent);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 800;
+}
+
+/* Workspace Styling */
+.workspace {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: #000;
+}
+
+.workspace-header {
+    height: 70px;
+    background: var(--bg-panel);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 5;
+}
+
+#viewer-container {
+    flex-grow: 1;
+    position: relative;
+}
+
+#panorama {
+    width: 100%;
+    height: 100%;
+}
+
+.hint {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+}
+
+/* Overlay / Empty State */
+.overlay-state {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 4;
+}
+
+.state-card {
+    text-align: center;
+    max-width: 400px;
+}
+
+.state-card .icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.state-card h3 {
+    margin-bottom: 12px;
+}
+
+.state-card p {
+    color: var(--text-dim);
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+/* Pannellum Hotspot Overrides */
+.pnlm-hotspot-base {
+    z-index: 2;
+    opacity: 1 !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+/* The tooltip container - we make it a point in the center of the hotspot */
+.pnlm-tooltip span {
+    padding: 0 !important;
+    background-color: transparent !important;
+    border: none !important;
+    overflow: visible !important;
+    width: 0 !important;
+    height: 0 !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    display: block !important;
+    pointer-events: none;
+}
+
+/* Let the button be clickable */
+.pnlm-tooltip span * {
+    pointer-events: auto;
+}
+
+.tooltip-text {
+    position: absolute;
+    bottom: 35px;
+    /* Higher above the center (13px radius + 22px gap) */
+    left: 50%;
+    transform: translateX(-50%);
+    background: none !important;
+    color: white;
+    font-weight: 800;
+    font-size: 1.1rem;
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    white-space: nowrap;
+}
+
+.edit-hotspot-btn {
+    position: absolute;
+    top: 35px;
+    /* Lower below the center (13px radius + 22px gap) */
+    left: 50%;
+    transform: translateX(-50%);
+    /* Start with centering */
+    background: var(--accent);
+    border: none;
+    color: white;
+    padding: 6px 14px;
+    /* Reduced padding (approx 30% smaller) */
+    border-radius: 6px;
+    font-size: 0.6rem;
+    /* Reduced font size */
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    box-shadow: none;
+    white-space: nowrap;
+}
+
+.edit-hotspot-btn:hover {
+    background: var(--accent-hover);
+    /* Re-apply the centering translation AND add the scale */
+    transform: translateX(-50%) scale(1.05);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+}
+
+.pnlm-hotspot-base:hover {
+    opacity: 1 !important;
+    transform: scale(1.25);
+    transition: transform 0.15s ease;
+}
+
+.inspector-body h4 {
+    margin-bottom: 20px;
+    color: var(--accent);
+    font-size: 1.1rem;
+}
+
+/* Fixed Inspector Layout */
+.inspector {
+    width: 320px;
+    min-width: 320px;
+    max-width: 320px;
+    background: var(--bg-panel);
+    backdrop-filter: blur(20px);
+    border-left: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.inspector-header {
+    padding: 24px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+}
+
+.inspector-body {
+    padding: 24px;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.inspector-body .form-group select,
+select {
+    width: 100%;
+    background: #1e1e28 !important;
+    border: 1px solid var(--border);
+    padding: 12px 16px;
+    border-radius: 8px;
+    color: white !important;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.9rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 8L1 3h10z'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 14px center !important;
+    transition: border-color 0.2s;
+}
+
+select:focus {
+    border-color: var(--accent);
+}
+
+select option {
+    background: #1e1e28;
+    color: white;
+    padding: 10px;
+}
+
+.empty-hint {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    margin-top: 40px;
+}
+
+/* Custom Dropdown */
+.custom-select {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    padding: 12px 16px;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: border-color 0.2s, background 0.2s;
+    user-select: none;
+}
+
+.custom-select:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent);
+}
+
+.custom-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    background: #1a1a24;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 100;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(20px);
+}
+
+.custom-option {
+    padding: 12px 16px;
+    color: var(--text-dim);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.15s;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.custom-option:last-child {
+    border-bottom: none;
+}
+
+.custom-option:hover {
+    background: rgba(99, 102, 241, 0.15);
+    color: white;
+    padding-left: 22px;
+}
+
+/* Forms & Buttons */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+input {
+    width: 100%;
+    background: var(--glass);
+    border: 1px solid var(--border);
+    padding: 12px 16px;
+    border-radius: 8px;
+    color: white;
+    outline: none;
+    transition: all 0.2s;
+}
+
+input:focus {
+    border-color: var(--accent);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.primary-btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+}
+
+.primary-btn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+}
+
+.secondary-btn {
+    background: var(--glass);
+    border: 1px solid var(--border);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+    padding: 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar-footer-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.sidebar-footer-actions .secondary-btn {
+    flex: 1;
+    padding: 10px 8px;
+    font-size: 0.78rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    backdrop-filter: blur(5px);
+}
+
+.hidden {
+    display: none;
+}
+
+.modal-card {
+    background: #1a1a20;
+    width: 100%;
+    max-width: 450px;
+    padding: 32px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+}
+
+.modal-card h3 {
+    margin-bottom: 24px;
+    font-size: 1.5rem;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+}
+
+.tertiary-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-dim);
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0 16px;
+}
+
+.field-hint {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    margin-top: 6px;
+}
+
+/* Toast Notification */
+#editor-toast {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    background: #1e1e2e;
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    border-radius: 14px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    max-width: 480px;
+    width: calc(100% - 48px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    animation: toastIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes toastIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.toast-icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.toast-content {
+    flex-grow: 1;
+}
+
+.toast-content strong {
+    display: block;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+    color: white;
+}
+
+.toast-content p {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+}
+
+.toast-close {
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    font-size: 1.2rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    line-height: 1;
+    padding: 0;
+    margin-top: -2px;
+    transition: color 0.2s;
+}
+
+.toast-close:hover {
+    color: white;
+}

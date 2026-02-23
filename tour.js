@@ -1,16 +1,37 @@
 /**
  * 3D Tour Module - Reusable Class
+ * Now supports remote JSON configuration for easy integration from Editor.
  */
 class TourModule {
-    constructor(containerId, config) {
+    constructor(containerId, configOrPath) {
         this.container = document.getElementById(containerId);
         if (!this.container) {
             console.error(`Container with ID "${containerId}" not found.`);
             return;
         }
-        this.config = config;
+
+        this.config = null;
+        this.configOrPath = configOrPath;
         this.viewer = null;
         this.overlay = this.container.querySelector('.tour-activation-overlay');
+
+        this.init();
+    }
+
+    async init() {
+        // If config is a string, it's a path to JSON
+        if (typeof this.configOrPath === 'string') {
+            try {
+                const response = await fetch(this.configOrPath);
+                this.config = await response.json();
+                console.log('3D Tour configuration loaded from:', this.configOrPath);
+            } catch (err) {
+                console.error('Failed to load tour config:', err);
+                return;
+            }
+        } else {
+            this.config = this.configOrPath;
+        }
 
         this.initEventListeners();
     }
@@ -22,6 +43,11 @@ class TourModule {
     }
 
     activate() {
+        if (!this.config) {
+            console.error('Tour configuration not ready.');
+            return;
+        }
+
         if (this.overlay) {
             this.overlay.classList.add('hidden');
         }
@@ -36,39 +62,12 @@ class TourModule {
     }
 }
 
-// Теперь используем локальные файлы, которые будут лежать в той же папке
-const defaultTourConfig = {
-    "default": {
-        "firstScene": "room1",
-        "author": "Antigravity 3D",
-        "sceneFadeDuration": 1000,
-        "autoLoad": true,
-        "showFullscreenCtrl": true,
-        "autoRotate": -2
-    },
-    "scenes": {
-        "room1": {
-            "title": "Первая комната",
-            "hfov": 110,
-            "type": "equirectangular",
-            "panorama": "room1.jpg",
-            "hotSpots": [
-                { "pitch": -5, "yaw": 120, "type": "scene", "text": "Перейти во вторую", "sceneId": "room2" }
-            ]
-        },
-        "room2": {
-            "title": "Тумба 1200",
-            "hfov": 110,
-            "type": "equirectangular",
-            "panorama": "room2.jpg",
-            "hotSpots": [
-                { "pitch": -5, "yaw": 0, "type": "scene", "text": "Вернуться назад", "sceneId": "room1" }
-            ]
-        }
-    }
-};
-
-// Инициализация
+// Initialization
 document.addEventListener('DOMContentLoaded', () => {
-    window.myTour = new TourModule('main-tour-container', defaultTourConfig);
+    /**
+     * ПУТЬ К КОНФИГУРАЦИИ:
+     * Вы можете передать объект напрямую (как раньше) 
+     * ИЛИ передать путь к файлу 'tour-editor/tour-config.json'
+     */
+    window.myTour = new TourModule('main-tour-container', './tour-editor/tour-config.json');
 });

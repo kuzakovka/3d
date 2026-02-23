@@ -4,72 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Тур Модуль | Профессиональная Демонстрация</title>
-    <!-- Pannellum CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css" />
-    <!-- Custom Style -->
-    <link rel="stylesheet" href="style.css">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>3D Тур</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+        }
+
+        #tour-container {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <link rel="stylesheet" href="tour-block.css">
 </head>
 
 <body>
 
-    <div class="container">
-        <header>
-            <h1>Виртуальный 3D Тур</h1>
-            <p class="subtitle">Интерактивный модуль для вашего сайта</p>
-        </header>
-
-        <section class="tour-container">
-            <!-- Main container for one tour instance -->
-            <div id="main-tour-container" class="tour-wrapper">
-                <!-- Activation Overlay -->
-                <div class="tour-activation-overlay">
-                    <div class="activation-card">
-                        <div class="activation-icon">🌐</div>
-                        <h3>Готовы к прогулке?</h3>
-                        <p>Нажмите, чтобы активировать 3D тур.<br>После активации вы сможете осматриваться вокруг.</p>
-                        <button class="activation-btn">Запустить тур</button>
-                    </div>
-                </div>
-
-                <!-- Pannellum Container -->
-                <div class="panorama-target" style="width: 100%; height: 100%;"></div>
-            </div>
-        </section>
-
-        <!-- Dummy Content to demonstrate scroll friendliness -->
-        <section class="content-section">
-            <h2>О нашем модуле</h2>
-            <p>Этот модуль разработан специально для легкой интеграции. Он не мешает плавному скроллингу страницы на
-                мобильных устройствах благодаря интеллектуальному слою активации. Пока вы не нажмете на кнопку
-                активации, сайт ведет себя как обычно.</p>
-            <p style="margin-top: 1rem;">Мы используем движок Pannellum, что обеспечивает высокую производительность и
-                поддержку всех современных браузеров.</p>
-        </section>
-
-        <section class="content-section">
-            <h2>Возможности расширения</h2>
-            <ul style="margin-left: 1.5rem; margin-top: 1rem;">
-                <li>Добавление множества комнат и переходов между ними.</li>
-                <li>Интерактивные точки (hotspots) с информацией.</li>
-                <li>Вставка видео и звука в панораму.</li>
-                <li>Кастомизация дизайна контроллеров.</li>
-            </ul>
-        </section>
+    <div id="tour-container" data-tour-config="./tour-editor/tour-config.json">
     </div>
 
-    <footer>
-        <p>&copy; 2026 3D Tour Pro. Все права защищены.</p>
-    </footer>
-
-    <!-- Pannellum JS -->
-    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
-    <!-- Custom Scripts -->
-    <script src="tour.js"></script>
+    <script src="tour-block.js"></script>
 </body>
 
 </html>
