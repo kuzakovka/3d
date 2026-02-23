@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Тур</title>
+    <meta name="description" content="Интерактивный 3D тур">
+
+    <!-- Pannellum — движок панорам (загружается из CDN) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; height: 100%; overflow: hidden; background: #000; }
+        #panorama { width: 100%; height: 100%; }
+    </style>
+</head>
+<body>
+    <div id="panorama"></div>
+
+    <script>
+        // Конфигурация тура (сгенерировано редактором)
+        var TOUR_CONFIG = {
+    "default": {
+        "firstScene": "scene_1771872299198",
+        "sceneFadeDuration": 1000,
+        "autoLoad": true,
+        "showFullscreenCtrl": true,
+        "autoRotate": 0
+    },
+    "scenes": {
+        "scene_1771872299198": {
+            "title": "1",
+            "type": "equirectangular",
+            "panorama": "https://raw.githubusercontent.com/kuzakovka/3d/main/panoramas/room3.jpg",
+            "hotSpots": [
+                {
+                    "pitch": 2.0594088773930745,
+                    "yaw": 65.73333999877197,
+                    "type": "scene",
+                    "text": "12",
+                    "sceneId": "scene_1771872308726"
+                }
+            ]
+        },
+        "scene_1771872308726": {
+            "title": "2",
+            "type": "equirectangular",
+            "panorama": "https://raw.githubusercontent.com/kuzakovka/3d/main/panoramas/room2.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -13.262922555604126,
+                    "yaw": -4.797703230831465,
+                    "type": "scene",
+                    "text": "фыв",
+                    "sceneId": "scene_1771872299198"
+                }
+            ]
+        }
+    }
+};
+
+        // Запуск после загрузки страницы
+        window.addEventListener('DOMContentLoaded', function() {
+            pannellum.viewer('panorama', TOUR_CONFIG);
+        });
+    </script>
+</body>
+</html>
